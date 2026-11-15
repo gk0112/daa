@@ -1,5 +1,3 @@
-// Online Java Compiler (Editor)
-// Write and run Java online using this editor.
 import java.util.*;
 class fractionkanpsack{
     public static void main(String[] args){
