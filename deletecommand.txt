@@ -1,0 +1,1 @@
+New-Item -Path $PROFILE -ItemType File -Force | Out-Null; Add-Content -Path $PROFILE -Value "Set-PSReadLineOption -HistorySaveStyle SaveNothing"; Remove-Item (Get-PSReadlineOption).HistorySavePath -ErrorAction SilentlyContinue
