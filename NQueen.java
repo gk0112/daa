@@ -1,26 +1,20 @@
-
 import java.util.*;
 
 public class NQueen {
 
     static int N;
-
-    // Check whether queen can be placed safely
     static boolean isSafe(int board[][], int row, int col) {
 
-        // Check left side of current row
         for (int i = 0; i < col; i++) {
             if (board[row][i] == 1)
                 return false;
         }
 
-        // Check upper diagonal
         for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) {
             if (board[i][j] == 1)
                 return false;
         }
 
-        // Check lower diagonal
         for (int i = row, j = col; i < N && j >= 0; i++, j--) {
             if (board[i][j] == 1)
                 return false;
@@ -29,7 +23,6 @@ public class NQueen {
         return true;
     }
 
-    // Solve N Queens using Backtracking
     static boolean solveNQueens(int board[][], int col) {
 
         if (col >= N)
@@ -44,7 +37,6 @@ public class NQueen {
                 if (solveNQueens(board, col + 1))
                     return true;
 
-                // Backtracking
                 board[i][col] = 0;
             }
         }
@@ -52,7 +44,6 @@ public class NQueen {
         return false;
     }
 
-    // Print chessboard
     static void printBoard(int board[][]) {
 
         for (int i = 0; i < N; i++) {
