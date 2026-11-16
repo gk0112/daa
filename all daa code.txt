@@ -1,0 +1,137 @@
+1. Fibonacci recursion code
+def fib(n):
+    if n<=1:
+        return n
+    return fib(n-1)+fib(n-2)
+n=int(input("enter the no: "))
+for i in range (n):
+    print (fib(i), end=" ")
+
+# non recursive 
+n=int(input("enter the no: "))
+a=0
+b=1
+for i in range(n):
+    print (a,end=" ")
+    c=a+b
+    a=b
+    b=c
+
+3. Fractional knapsack
+
+n = int(input("Enter number of items: "))
+w = list(map(int, input("Enter weights: ").split()))
+p = list(map(int, input("Enter profits: ").split()))
+capacity = int(input("Enter capacity: "))
+for i in range(n):
+    for j in range(i+1, n):
+        if p[i]/w[i] < p[j]/w[j]:
+            w[i], w[j] = w[j], w[i]
+            p[i], p[j] = p[j], p[i]
+
+total = 0
+
+for i in range(n):
+    if capacity >= w[i]:
+        capacity -= w[i]
+        total += p[i]
+        print("Item", i+1, ":", w[i], "taken")
+    else:
+        total += (p[i]/w[i]) * capacity
+        print("Item", i+1, ":", capacity, "taken")
+        break
+
+print("Maximum profit =", total)
+
+
+4. 0\1 knapsack
+
+n = int(input("Enter number of items: "))
+
+w = list(map(int, input("Enter weights: ").split()))
+p = list(map(int, input("Enter profits: ").split()))
+
+W = int(input("Enter knapsack capacity: "))
+
+dp = [[0] * (W + 1) for i in range(n + 1)]
+
+for i in range(1, n + 1):
+    for j in range(W + 1):
+        if w[i-1] <= j:
+            dp[i][j] = max(p[i-1] + dp[i-1][j-w[i-1]], dp[i-1][j])
+        else:
+            dp[i][j] = dp[i-1][j]
+
+print("Maximum Profit:", dp[n][W])
+
+
+
+5. Huffman coding
+
+import heapq
+def huffman(chars, freq):
+    heap = []
+    for i in range(len(chars)):
+        heap.append((freq[i], i, chars[i]))
+    heapq.heapify(heap)
+    count = len(chars)
+    while len(heap) > 1:
+        a = heapq.heappop(heap)
+        b = heapq.heappop(heap)
+        heapq.heappush(heap, (a[0] + b[0], count, [a[2], b[2]]))
+        count += 1
+    def show(tree, code=""):
+        if isinstance(tree, str):
+            print(tree, ":", code)
+        else:
+            show(tree[0], code + "0")
+            show(tree[1], code + "1")
+    show(heap[0][2])
+
+
+chars = input(Enter the character here separated by space: ").split()
+freq = list(map(int, input("Enter frequency: ").split()))
+
+huffman(chars, freq)
+
+
+
+
+
+
+
+6. N-Queen
+
+n = 4
+board = [-1] * n
+
+def place(row):
+    if row == n:
+        return True
+
+    for col in range(n):
+        safe = True
+
+        for i in range(row):
+            if board[i] == col or abs(board[i]-col) == abs(i-row):
+                safe = False
+
+        if safe:
+            board[row] = col
+
+            if place(row + 1):
+                return True
+
+            board[row] = -1
+
+    return False
+
+if place(0):
+    for i in range(n):
+        print("." * board[i] + "Q" + "." * (n-board[i]-1))
+else:
+    print("No solution")
+
+
+
+
